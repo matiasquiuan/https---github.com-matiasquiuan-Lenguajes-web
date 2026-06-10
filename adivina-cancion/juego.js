@@ -56,7 +56,7 @@ function juegoInicio(){
     
 }
 
-function verificarRespuesta(respuesta) {
+function verificarRespuesta() {
     let respuesta = document.getElementById("respuesta");
     let puntos = document.getElementById("puntos");
     if(respuesta.value.toLowerCase() === randomSong.name.toLowerCase()){
