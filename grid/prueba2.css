@@ -1,0 +1,161 @@
+/* Estilo básico y colores */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Encabezado */
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.navegador {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  color: #e78151;
+  
+  
+}
+
+/* Tipografía */
+.typography-section {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+}
+
+.typography-section h2 {
+  font-size: 24px;
+  color: #ff5733;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #ff5733;
+}
+
+/* Diseño con Flexbox */
+.layout-section {
+  padding: 20px;
+  background-color: #e0e0e0;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.flex-item {
+  background-color: #ff5733;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 30%;
+}
+
+/* Diseño con Grid */
+.grid-section {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Transiciones */
+.transitions-section {
+  padding: 20px;
+  background-color: #e0e0e0;
+  text-align: center;
+}
+
+.transition-button {
+  background-color: #ff5733;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.transition-button:hover {
+  background-color: #333;
+  transform: scale(1.1);
+}
+
+/* Transformaciones */
+.transform-section {
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  margin: 20px;
+}
+
+.transform-box {
+  display: inline-block;
+  background-color: #ff5733;
+  color: #fff;
+  padding: 20px;
+  transform: rotate(15deg) scale(1.2);
+  transition: transform 0.5s ease;
+}
+
+.transform-box:hover {
+  transform: rotate(-15deg) scale(1);
+}
+
+/* Animaciones */
+.animations-section {
+  padding: 20px;
+  background-color: #e0e0e0;
+  text-align: center;
+  margin: 20px;
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-20px);
+  }
+}
+
+.animated-box {
+  display: inline-block;
+  background-color: #ff5733;
+  color: #fff;
+  padding: 20px;
+  animation: bounce 1s infinite;
+}
+
+/* Pie de página */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}

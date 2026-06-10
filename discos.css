@@ -1,0 +1,111 @@
+body {
+    background: linear-gradient(160deg, #0a2a6e 0%, #1155b0 40%, #0e7fc2 70%, #14a8c4 100%);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* encabezado */
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+/* navegacion */
+.navigation{
+  background-color: #FFE030;
+  color: rgb(25, 20, 20);
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 20px;
+  font-weight: 100;
+  word-spacing: 2px;  
+}
+
+/* titulo principal */
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 3.5rem;
+    color: #FFE030;
+    text-shadow:
+        3px 3px 0px #d4a500,
+        0 0 30px rgba(255, 224, 48, 0.4);
+    margin: 10px 0 20px;
+    letter-spacing: 2px;
+}
+/*titulo discos*/
+h2 {
+    font-family: 'Righteous', cursive;
+    color: #FFE030;
+    font-size: 2.6rem;
+    text-shadow: 3px 3px 0 #b38a00;
+    margin-bottom: 6px;
+}
+ 
+.subtitulo {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+}
+
+/* span */
+.span {
+    display: inline-block;
+    background: rgba(255, 224, 48, 0.12);
+    border: 1px solid rgba(255, 224, 48, 0.3);
+    color: #FFE030;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-top: 14px;
+}
+
+/* seccion discos */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    
+}
+.grid-item img {
+    display: block;
+    margin: 0 auto 12px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.grid-item {
+    background: rgba(255, 255, 255, 0.07);     
+    border: 1px solid rgba(255, 224, 48, 0.2);   
+    border-radius: 12px;
+    padding: 16px;
+    transform: translateY(0px);                 
+    box-shadow: 0 0px 0px rgba(0,0,0,0);         
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+    
+}
+
+/* hover */
+.grid-item:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 224, 48, 0.55);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+
+/* responsive */
+@media (max-width: 500px) {
+    h1 { font-size: 1.9rem; }
+    .grid { grid-template-columns: 1fr; }
+}

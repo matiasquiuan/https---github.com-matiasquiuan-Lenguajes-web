@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>La historia de los Beatles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(150deg, #0a2a6e, #1155b0 50%, #0e7fc2);
+      min-height: 100vh;
+      padding: 30px 16px;
+    }
+    /* navegacion */
+    .navigation{
+      background-color: #FFE030;
+      color: rgb(25, 20, 20);
+      text-align: center;
+      font-family: 'Righteous', cursive;
+      font-size: 20px;
+      font-weight: 100;
+      word-spacing: 2px;  
+    }
+    /* titulo principal */
+    h1 {
+      font-family: 'Righteous', cursive;
+      font-size: 3.5rem;
+      color: #FFE030;
+      text-shadow:
+          3px 3px 0px #d4a500,
+          0 0 30px rgba(255, 224, 48, 0.4);
+      margin: 10px 0 20px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    /*titulo historia*/
+    h2 {
+      font-family: 'Righteous', cursive;
+      color: #FFE030;
+      font-size: 2.4rem;
+      text-align: center;
+      text-shadow: 3px 3px 0 #b38a00;
+      margin-bottom: 6px;
+    }
+
+    p{
+        color: #fff;
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    img[alt="beatles_america"] {
+      display: block; 
+      margin: 30px auto; 
+      max-width: 100%; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    /* grid principal */
+    #historia {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+    /* bloques */
+    .block {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 224, 48, 0.2);
+      border-radius: 12px;
+      padding: 22px 20px 20px;
+      position: relative;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      margin-right: 20px; 
+      margin-bottom: 20px;
+    }
+    .block:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 224, 48, 0.45);
+    }
+    .block h3 {
+      font-family: 'Righteous', cursive;
+      color: #fff;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    .block p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+      /* texto año */
+    .tiempo {
+      display: inline-block;
+      background: #FFE030;
+      color: #0a2a6e;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    
+  </style>
+</head>
+<body>
+    <a href="index.html" style="text-decoration: none;"><h1>The Beatles Fan</h1> </a>
+    <!-- navegacion -->
+    <div class="navigation">
+        <a style="text-decoration:none" href="quiz.html" type="text/css">Quiz I</a> <a style="text-decoration:none" href="discos.html" type="text/css">Discografía </a> <a style="text-decoration:none" href="historia.html" type="text/css">I Historia</a><style>
+                a { color: rgb(25, 20, 20); }
+        </style>  
+    </div>
+    <h2>La Historia de los Beatles</h2>
+    <div id="historia">
+        <div class="grid">
+            <div class="block">
+                <span class="tiempo">1960</span>
+                <h3>El Origen</h3>
+                <p>Todo comenzó en Liverpool, Inglaterra. John Lennon, Paul McCartney, George Harrison y Ringo Starr formaron el grupo que cambiaría la música para siempre. Sus primeros años tocaron en The Cavern Club y en clubs de Hamburgo, Alemania.</p>
+            </div>
+            <div class="block">
+                <span class="tiempo">1962-1964</span>
+                <h3>El Ascenso</h3>
+                <p>En 1962, lanzaron su primer sencillo "Love Me Do". Rápidamente ganaron popularidad en el Reino Unido y luego en Estados Unidos con su aparición en The Ed Sullivan Show en 1964, marcando el inicio de la "Beatlemanía".</p>
+            </div>
+            <div class="block">
+                <span class="tiempo">1965-1970</span>
+                <h3>La Evolución</h3>
+                <p>Desde 1965, los Beatles continuaron innovando. Su música se volvió más compleja y experimental, y su impacto en la cultura popular fue aún mayor.Álbumes como Rubber Soul, Revolver y el monumental Sgt. Pepper's Lonely Hearts Club Band redefinieron lo que podía ser un disco de rock.</p>
+            </div>
+            <div class="block">
+                <span class="tiempo">1970</span>
+                <h3>El Final</h3>
+                <p>A pesar de su éxito, las tensiones internas y las diferencias creativas llevaron a la disolución de la banda en 1970.  Abbey Road fue su último gran triunfo conjunto, sin embargo, su legado musical sigue vivo, inspirando a generaciones de músicos y fans en todo el mundo.</p>
+        </div>
+    </div>
+    <img src="Imagenes/The_Beatles_in_America.jpg" alt="beatles_america">
+    
+</body>
+</html>

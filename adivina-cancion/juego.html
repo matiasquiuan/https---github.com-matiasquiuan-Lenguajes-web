@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Adivina la canción</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="juego.css">
+    <link href="C:\Users\matia\OneDrive\Documents\lenguajes\Lenguajes-web\quiz">
+    <script type="module" src="juego.js"></script>
+</head>
+<body>
+
+    <a href="index.html" style="text-decoration: none;"><h1>The Beatles Fan</h1> </a>
+    <!-- navegacion -->
+    <div class="navigation">
+        <a style="text-decoration:none" href="quiz.html" type="text/css">Quiz I</a> <a style="text-decoration:none" href="discos.html" type="text/css">Discografía </a> <a style="text-decoration:none" href="historia.html" type="text/css">I Historia</a><style>
+                a { color: rgb(25, 20, 20); }
+        </style>  
+    </div>
+
+    <main class="game-container">
+    <h1>Adivina la canción</h1>
+    <p class="subtitle">Escuchá el fragmento y elegí el título correcto</p>
+
+    <!-- puntaje -->
+    <div class="puntaje">
+      <span>⏱ <span id="tiempo">15</span>s</span>
+      <span>🏆 Puntos: <span id="puntos">0</span></span>
+      <span>❓ <span id="streak">1</span>/<span id="total">5</span></span>
+    </div>
+
+    <!-- barra de tiempo -->
+    <div class="barra">
+      <div class="timer-bar" id="timerBar"></div>
+    </div>
+
+    <!-- reproductor -->
+    <div class="reproductor">
+      <button id="btn">▶ Reproducir fragmento</button>
+      <audio id="audio"></audio>
+    </div>
+
+    <!-- Player de YouTube oculto (0x0, solo audio) -->
+    <div id="yt-player"></div>
+
+    <!-- feedback -->
+    <div class="feedback hidden" id="feedback"></div>
+
+    <!-- pantalla de resultado final -->
+    <div class="result hidden" id="result">
+      <h2>¡Juego terminado!</h2>
+      <p>Tu puntaje: <strong id="finalScore"></strong></p>
+      <button id="restart">Jugar de nuevo</button>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Beatles Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(150deg, #0a2a6e, #1155b0 50%, #0e7fc2);
+      min-height: 100vh;
+      padding: 30px 16px;
+    }
+
+    .quiz-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    /*titulo principal*/
+    h1 {
+      font-family: 'Righteous', cursive;
+      font-size: 3.5rem;
+      color: #FFE030;
+      text-shadow:
+          3px 3px 0px #d4a500,
+          0 0 30px rgba(255, 224, 48, 0.4);
+      margin: 10px 0 20px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    /*titulo quiz*/
+    h2 {
+      font-family: 'Righteous', cursive;
+      color: #FFE030;
+      font-size: 2.4rem;
+      text-align: center;
+      text-shadow: 3px 3px 0 #b38a00;
+      margin-bottom: 6px;
+    }
+    /*nav*/
+    .navigation{
+      background-color: #FFE030;
+      color: rgb(25, 20, 20);
+      text-align: center;
+      font-family: 'Righteous', cursive;
+      font-size: 20px;
+      font-weight: 100;
+      word-spacing: 2px;  
+    }
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+    }
+
+    /* tarjeta por pregunta */
+    .question {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,224,48,0.25);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .question h3 {
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    /*ocultar radios reales */
+    input[type="radio"] { display: none; }
+
+    /* opciones */
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .choices label {
+      display: block;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 11px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      transition: background 0.15s;
+    }
+
+    .choices label:hover {
+      background: rgba(255,255,255,0.22);
+    }
+
+    /* feedback */
+    .feedback { display: none; margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; line-height: 1.4; }
+    .ok { background: rgba(34,197,94,0.2);  color: #86efac; border: 1px solid rgba(34,197,94,0.4); }
+    .ko { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.35); }
+
+    /* PREGUNTA 1 — correcta: q1-c (1969)*/
+    #q1-c:checked ~ .choices label[for="q1-c"] { background:#16a34a; border-color:#16a34a; }
+    #q1-a:checked ~ .choices label[for="q1-a"],
+    #q1-b:checked ~ .choices label[for="q1-b"],
+    #q1-d:checked ~ .choices label[for="q1-d"] { background:#991b1b; border-color:#991b1b; }
+    #q1-a:checked ~ .choices label[for="q1-c"],
+    #q1-b:checked ~ .choices label[for="q1-c"],
+    #q1-d:checked ~ .choices label[for="q1-c"] { background:#16a34a; border-color:#16a34a; }
+    #q1-c:checked ~ .ok  { display:block; }
+    #q1-a:checked ~ .ko,
+    #q1-b:checked ~ .ko,
+    #q1-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 2 — correcta: q2-b (Paint It Black)*/
+    #q2-b:checked ~ .choices label[for="q2-b"] { background:#16a34a; border-color:#16a34a; }
+    #q2-a:checked ~ .choices label[for="q2-a"],
+    #q2-c:checked ~ .choices label[for="q2-c"],
+    #q2-d:checked ~ .choices label[for="q2-d"] { background:#991b1b; border-color:#991b1b; }
+    #q2-a:checked ~ .choices label[for="q2-b"],
+    #q2-c:checked ~ .choices label[for="q2-b"],
+    #q2-d:checked ~ .choices label[for="q2-b"] { background:#16a34a; border-color:#16a34a; }
+    #q2-b:checked ~ .ok  { display:block; }
+    #q2-a:checked ~ .ko,
+    #q2-c:checked ~ .ko,
+    #q2-d:checked ~ .ko  { display:block; }
+
+    /*PREGUNTA 3 — correcta: q3-d (Ringo Starr)*/
+    #q3-d:checked ~ .choices label[for="q3-d"] { background:#16a34a; border-color:#16a34a; }
+    #q3-a:checked ~ .choices label[for="q3-a"],
+    #q3-b:checked ~ .choices label[for="q3-b"],
+    #q3-c:checked ~ .choices label[for="q3-c"] { background:#991b1b; border-color:#991b1b; }
+    #q3-a:checked ~ .choices label[for="q3-d"],
+    #q3-b:checked ~ .choices label[for="q3-d"],
+    #q3-c:checked ~ .choices label[for="q3-d"] { background:#16a34a; border-color:#16a34a; }
+    #q3-d:checked ~ .ok  { display:block; }
+    #q3-a:checked ~ .ko,
+    #q3-b:checked ~ .ko,
+    #q3-c:checked ~ .ko  { display:block; }
+
+    /*PREGUNTA 4 — correcta: q4-a (Liverpool)*/
+    #q4-a:checked ~ .choices label[for="q4-a"] { background:#16a34a; border-color:#16a34a; }
+    #q4-b:checked ~ .choices label[for="q4-b"],
+    #q4-c:checked ~ .choices label[for="q4-c"],
+    #q4-d:checked ~ .choices label[for="q4-d"] { background:#991b1b; border-color:#991b1b; }
+    #q4-b:checked ~ .choices label[for="q4-a"],
+    #q4-c:checked ~ .choices label[for="q4-a"],
+    #q4-d:checked ~ .choices label[for="q4-a"] { background:#16a34a; border-color:#16a34a; }
+    #q4-a:checked ~ .ok  { display:block; }
+    #q4-b:checked ~ .ko,
+    #q4-c:checked ~ .ko,
+    #q4-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 5 — correcta: q5-c (13)*/
+    #q5-c:checked ~ .choices label[for="q5-c"] { background:#16a34a; border-color:#16a34a; }
+    #q5-a:checked ~ .choices label[for="q5-a"],
+    #q5-b:checked ~ .choices label[for="q5-b"],
+    #q5-d:checked ~ .choices label[for="q5-d"] { background:#991b1b; border-color:#991b1b; }
+    #q5-a:checked ~ .choices label[for="q5-c"],
+    #q5-b:checked ~ .choices label[for="q5-c"],
+    #q5-d:checked ~ .choices label[for="q5-c"] { background:#16a34a; border-color:#16a34a; }
+    #q5-c:checked ~ .ok  { display:block; }
+    #q5-a:checked ~ .ko,
+    #q5-b:checked ~ .ko,
+    #q5-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 6 — correcta: q6-b (The Quarrymen)*/
+    #q6-b:checked ~ .choices label[for="q6-b"] { background:#16a34a; border-color:#16a34a; }
+    #q6-a:checked ~ .choices label[for="q6-a"],
+    #q6-c:checked ~ .choices label[for="q6-c"],
+    #q6-d:checked ~ .choices label[for="q6-d"] { background:#991b1b; border-color:#991b1b; }
+    #q6-a:checked ~ .choices label[for="q6-b"],
+    #q6-c:checked ~ .choices label[for="q6-b"],
+    #q6-d:checked ~ .choices label[for="q6-b"] { background:#16a34a; border-color:#16a34a; }
+    #q6-b:checked ~ .ok  { display:block; }
+    #q6-a:checked ~ .ko,
+    #q6-c:checked ~ .ko,
+    #q6-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 7 — correcta: q7-c (I Wanna Be Your Man)*/
+    #q7-c:checked ~ .choices label[for="q7-c"] { background:#16a34a; border-color:#16a34a; }
+    #q7-a:checked ~ .choices label[for="q7-a"],
+    #q7-b:checked ~ .choices label[for="q7-b"],
+    #q7-d:checked ~ .choices label[for="q7-d"] { background:#991b1b; border-color:#991b1b; }
+    #q7-a:checked ~ .choices label[for="q7-c"],
+    #q7-b:checked ~ .choices label[for="q7-c"],
+    #q7-d:checked ~ .choices label[for="q7-c"] { background:#16a34a; border-color:#16a34a; }
+    #q7-c:checked ~ .ok  { display:block; }
+    #q7-a:checked ~ .ko,
+    #q7-b:checked ~ .ko,
+    #q7-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 8 — correcta: q8-d (1970)*/
+    #q8-d:checked ~ .choices label[for="q8-d"] { background:#16a34a; border-color:#16a34a; }
+    #q8-a:checked ~ .choices label[for="q8-a"],
+    #q8-b:checked ~ .choices label[for="q8-b"],
+    #q8-c:checked ~ .choices label[for="q8-c"] { background:#991b1b; border-color:#991b1b; }
+    #q8-a:checked ~ .choices label[for="q8-d"],
+    #q8-b:checked ~ .choices label[for="q8-d"],
+    #q8-c:checked ~ .choices label[for="q8-d"] { background:#16a34a; border-color:#16a34a; }
+    #q8-d:checked ~ .ok  { display:block; }
+    #q8-a:checked ~ .ko,
+    #q8-b:checked ~ .ko,
+    #q8-c:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 9 — correcta: q9-a (Brian Epstein) */
+    #q9-a:checked ~ .choices label[for="q9-a"] { background:#16a34a; border-color:#16a34a; }
+    #q9-b:checked ~ .choices label[for="q9-b"],
+    #q9-c:checked ~ .choices label[for="q9-c"],
+    #q9-d:checked ~ .choices label[for="q9-d"] { background:#991b1b; border-color:#991b1b; }
+    #q9-b:checked ~ .choices label[for="q9-a"],
+    #q9-c:checked ~ .choices label[for="q9-a"],
+    #q9-d:checked ~ .choices label[for="q9-a"] { background:#16a34a; border-color:#16a34a; }
+    #q9-a:checked ~ .ok  { display:block; }
+    #q9-b:checked ~ .ko,
+    #q9-c:checked ~ .ko,
+    #q9-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 10 — correcta: q10-b (Paul McCartney) */
+    #q10-b:checked ~ .choices label[for="q10-b"] { background:#16a34a; border-color:#16a34a; }
+    #q10-a:checked ~ .choices label[for="q10-a"],
+    #q10-c:checked ~ .choices label[for="q10-c"],
+    #q10-d:checked ~ .choices label[for="q10-d"] { background:#991b1b; border-color:#991b1b; }
+    #q10-a:checked ~ .choices label[for="q10-b"],
+    #q10-c:checked ~ .choices label[for="q10-b"],
+    #q10-d:checked ~ .choices label[for="q10-b"] { background:#16a34a; border-color:#16a34a; }
+    #q10-b:checked ~ .ok  { display:block; }
+    #q10-a:checked ~ .ko,
+    #q10-c:checked ~ .ko,
+    #q10-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 11 — correcta: q11-a (Please Please Me) */
+    #q11-a:checked ~ .choices label[for="q11-a"] { background:#16a34a; border-color:#16a34a; }
+    #q11-b:checked ~ .choices label[for="q11-b"],
+    #q11-c:checked ~ .choices label[for="q11-c"],
+    #q11-d:checked ~ .choices label[for="q11-d"] { background:#991b1b; border-color:#991b1b; }
+    #q11-b:checked ~ .choices label[for="q11-a"],
+    #q11-c:checked ~ .choices label[for="q11-a"],
+    #q11-d:checked ~ .choices label[for="q11-a"] { background:#16a34a; border-color:#16a34a; }
+    #q11-a:checked ~ .ok  { display:block; }
+    #q11-b:checked ~ .ko,
+    #q11-c:checked ~ .ko,
+    #q11-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 12 — correcta: q12-c (George Martin)*/
+    #q12-c:checked ~ .choices label[for="q12-c"] { background:#16a34a; border-color:#16a34a; }
+    #q12-a:checked ~ .choices label[for="q12-a"],
+    #q12-b:checked ~ .choices label[for="q12-b"],
+    #q12-d:checked ~ .choices label[for="q12-d"] { background:#991b1b; border-color:#991b1b; }
+    #q12-a:checked ~ .choices label[for="q12-c"],
+    #q12-b:checked ~ .choices label[for="q12-c"],
+    #q12-d:checked ~ .choices label[for="q12-c"] { background:#16a34a; border-color:#16a34a; }
+    #q12-c:checked ~ .ok  { display:block; }
+    #q12-a:checked ~ .ko,
+    #q12-b:checked ~ .ko,
+    #q12-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 13 — correcta: q13-b (A Hard Day's Night)*/
+    #q13-b:checked ~ .choices label[for="q13-b"] { background:#16a34a; border-color:#16a34a; }
+    #q13-a:checked ~ .choices label[for="q13-a"],
+    #q13-c:checked ~ .choices label[for="q13-c"],
+    #q13-d:checked ~ .choices label[for="q13-d"] { background:#991b1b; border-color:#991b1b; }
+    #q13-a:checked ~ .choices label[for="q13-b"],
+    #q13-c:checked ~ .choices label[for="q13-b"],
+    #q13-d:checked ~ .choices label[for="q13-b"] { background:#16a34a; border-color:#16a34a; }
+    #q13-b:checked ~ .ok  { display:block; }
+    #q13-a:checked ~ .ko,
+    #q13-c:checked ~ .ko,
+    #q13-d:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 14 — correcta: q14-d (Bajo)*/
+    #q14-d:checked ~ .choices label[for="q14-d"] { background:#16a34a; border-color:#16a34a; }
+    #q14-a:checked ~ .choices label[for="q14-a"],
+    #q14-b:checked ~ .choices label[for="q14-b"],
+    #q14-c:checked ~ .choices label[for="q14-c"] { background:#991b1b; border-color:#991b1b; }
+    #q14-a:checked ~ .choices label[for="q14-d"],
+    #q14-b:checked ~ .choices label[for="q14-d"],
+    #q14-c:checked ~ .choices label[for="q14-d"] { background:#16a34a; border-color:#16a34a; }
+    #q14-d:checked ~ .ok  { display:block; }
+    #q14-a:checked ~ .ko,
+    #q14-b:checked ~ .ko,
+    #q14-c:checked ~ .ko  { display:block; }
+
+    /* PREGUNTA 15 — correcta: q15-a (1964)*/
+    #q15-a:checked ~ .choices label[for="q15-a"] { background:#16a34a; border-color:#16a34a; }
+    #q15-b:checked ~ .choices label[for="q15-b"],
+    #q15-c:checked ~ .choices label[for="q15-c"],
+    #q15-d:checked ~ .choices label[for="q15-d"] { background:#991b1b; border-color:#991b1b; }
+    #q15-b:checked ~ .choices label[for="q15-a"],
+    #q15-c:checked ~ .choices label[for="q15-a"],
+    #q15-d:checked ~ .choices label[for="q15-a"] { background:#16a34a; border-color:#16a34a; }
+    #q15-a:checked ~ .ok  { display:block; }
+    #q15-b:checked ~ .ko,
+    #q15-c:checked ~ .ko,
+    #q15-d:checked ~ .ko  { display:block; }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.35);
+      margin-top: 24px;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+    <a href="index.html" style="text-decoration: none;"><h1>The Beatles Fan</h1> </a>
+      <!-- navegacion -->
+      <div class="navigation">
+          <a style="text-decoration:none" href="quiz.html" type="text/css">Quiz I</a> <a style="text-decoration:none" href="discos.html" type="text/css">Discografía </a> <a style="text-decoration:none" href="historia.html" type="text/css">I Historia</a><style>
+                  a { color: rgb(25, 20, 20); }
+          </style>  
+      </div>
+    <div class="quiz-wrap">
+
+    <h2>Beatles Quiz</h2>
+    <!-- PREGUNTA 1 -->
+    <div class="question">
+      <input type="radio" name="q1" id="q1-a">
+      <input type="radio" name="q1" id="q1-b">
+      <input type="radio" name="q1" id="q1-c">
+      <input type="radio" name="q1" id="q1-d">
+      <h3>1. ¿En qué año se lanzó el álbum <em>Abbey Road</em>?</h3>
+      <div class="choices">
+        <label for="q1-a">A) 1966</label>
+        <label for="q1-b">B) 1968</label>
+        <label for="q1-c">C) 1969</label>
+        <label for="q1-d">D) 1971</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Abbey Road salió en septiembre de 1969, penúltimo álbum del grupo.</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era C) 1969 — penúltimo álbum antes de "Let It Be".</p>
+    </div>
+
+    <!-- PREGUNTA 2 -->
+    <div class="question">
+      <input type="radio" name="q2" id="q2-a">
+      <input type="radio" name="q2" id="q2-b">
+      <input type="radio" name="q2" id="q2-c">
+      <input type="radio" name="q2" id="q2-d">
+      <h3>2. ¿Cuál de estas canciones NO es de The Beatles?</h3>
+      <div class="choices">
+        <label for="q2-a">A) Hey Jude</label>
+        <label for="q2-b">B) Paint It Black</label>
+        <label for="q2-c">C) Come Together</label>
+        <label for="q2-d">D) Let It Be</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! "Paint It Black" es de los Rolling Stones (1966).</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era B) Paint It Black — es de los Rolling Stones.</p>
+    </div>
+
+    <!-- PREGUNTA 3 -->
+    <div class="question">
+      <input type="radio" name="q3" id="q3-a">
+      <input type="radio" name="q3" id="q3-b">
+      <input type="radio" name="q3" id="q3-c">
+      <input type="radio" name="q3" id="q3-d">
+      <h3>3. ¿Quién es el baterista de The Beatles?</h3>
+      <div class="choices">
+        <label for="q3-a">A) John Lennon</label>
+        <label for="q3-b">B) Paul McCartney</label>
+        <label for="q3-c">C) George Harrison</label>
+        <label for="q3-d">D) Ringo Starr</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Ringo Starr reemplazó a Pete Best en agosto de 1962.</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era D) Ringo Starr, que se unió en 1962.</p>
+    </div>
+
+    <!-- PREGUNTA 4 -->
+    <div class="question">
+      <input type="radio" name="q4" id="q4-a">
+      <input type="radio" name="q4" id="q4-b">
+      <input type="radio" name="q4" id="q4-c">
+      <input type="radio" name="q4" id="q4-d">
+      <h3>4. ¿En qué ciudad se formaron The Beatles?</h3>
+      <div class="choices">
+        <label for="q4-a">A) Liverpool</label>
+        <label for="q4-b">B) Londres</label>
+        <label for="q4-c">C) Manchester</label>
+        <label for="q4-d">D) Birmingham</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! The Beatles se formaron en Liverpool en 1960.</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era A) Liverpool, donde se formaron en 1960.</p>
+    </div>
+
+    <!-- PREGUNTA 5 -->
+    <div class="question">
+      <input type="radio" name="q5" id="q5-a">
+      <input type="radio" name="q5" id="q5-b">
+      <input type="radio" name="q5" id="q5-c">
+      <input type="radio" name="q5" id="q5-d">
+      <h3>5. ¿Cuántos álbumes de estudio grabaron The Beatles?</h3>
+      <div class="choices">
+        <label for="q5-a">A) 10</label>
+        <label for="q5-b">B) 11</label>
+        <label for="q5-c">C) 13</label>
+        <label for="q5-d">D) 15</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Grabaron 13 álbumes de estudio entre 1963 y 1970.</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era C) 13 álbumes, desde Please Please Me hasta Let It Be.</p>
+    </div>
+
+    <!-- PREGUNTA 6 -->
+    <div class="question">
+      <input type="radio" name="q6" id="q6-a">
+      <input type="radio" name="q6" id="q6-b">
+      <input type="radio" name="q6" id="q6-c">
+      <input type="radio" name="q6" id="q6-d">
+      <h3>6. ¿Cómo se llamaba originalmente la banda antes de ser The Beatles?</h3>
+      <div class="choices">
+        <label for="q6-a">A) The Silver Beetles</label>
+        <label for="q6-b">B) The Quarrymen</label>
+        <label for="q6-c">C) Johnny and the Moondogs</label>
+        <label for="q6-d">D) The Fab Four</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! John Lennon fundó The Quarrymen en 1956. Pasaron por varios nombres antes de llegar a The Beatles en 1960.</p>
+      <p class="feedback ko">✗ Incorrecto. La respuesta era B) The Quarrymen, fundado por John Lennon en 1956.</p>
+    </div>
+
+    <!-- PREGUNTA 7 -->
+    <div class="question">
+      <input type="radio" name="q7" id="q7-a">
+      <input type="radio" name="q7" id="q7-b">
+      <input type="radio" name="q7" id="q7-c">
+      <input type="radio" name="q7" id="q7-d">
+      <h3>7. ¿Qué canción le escribieron y regalaron a los Rolling Stones en 1963?</h3>
+      <div class="choices">
+        <label for="q7-a">A) Love Me Do</label>
+        <label for="q7-b">B) Twist and Shout</label>
+        <label for="q7-c">C) I Wanna Be Your Man</label>
+        <label for="q7-d">D) From Me to You</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Lennon y McCartney le dieron "I Wanna Be Your Man" a los Stones, que la convirtieron en su segundo single.</p>
+      <p class="feedback ko">✗ Incorrecto. Era C) I Wanna Be Your Man — Lennon y McCartney la escribieron en el acto y se la regalaron.</p>
+    </div>
+
+    <!-- PREGUNTA 8 -->
+    <div class="question">
+      <input type="radio" name="q8" id="q8-a">
+      <input type="radio" name="q8" id="q8-b">
+      <input type="radio" name="q8" id="q8-c">
+      <input type="radio" name="q8" id="q8-d">
+      <h3>8. ¿En qué año se separaron oficialmente The Beatles?</h3>
+      <div class="choices">
+        <label for="q8-a">A) 1968</label>
+        <label for="q8-b">B) 1969</label>
+        <label for="q8-c">C) 1971</label>
+        <label for="q8-d">D) 1970</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Paul McCartney anunció su salida en abril de 1970, disolviendo oficialmente la banda.</p>
+      <p class="feedback ko">✗ Incorrecto. Era D) 1970 — Paul McCartney anunció su salida en abril de ese año.</p>
+    </div>
+
+    <!-- PREGUNTA 9 -->
+    <div class="question">
+      <input type="radio" name="q9" id="q9-a">
+      <input type="radio" name="q9" id="q9-b">
+      <input type="radio" name="q9" id="q9-c">
+      <input type="radio" name="q9" id="q9-d">
+      <h3>9. ¿Cómo se llamaba el manager que los llevó a la fama?</h3>
+      <div class="choices">
+        <label for="q9-a">A) Brian Epstein</label>
+        <label for="q9-b">B) Allen Klein</label>
+        <label for="q9-c">C) Andrew Oldham</label>
+        <label for="q9-d">D) Peter Brown</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Brian Epstein los descubrió en el Cavern Club de Liverpool en 1961 y los gestionó hasta su muerte en 1967.</p>
+      <p class="feedback ko">✗ Incorrecto. Era A) Brian Epstein, quien los descubrió en el Cavern Club en 1961.</p>
+    </div>
+
+    <!-- PREGUNTA 10 -->
+    <div class="question">
+      <input type="radio" name="q10" id="q10-a">
+      <input type="radio" name="q10" id="q10-b">
+      <input type="radio" name="q10" id="q10-c">
+      <input type="radio" name="q10" id="q10-d">
+      <h3>10. ¿Quién compuso principalmente "Yesterday" (1965)?</h3>
+      <div class="choices">
+        <label for="q10-a">A) John Lennon</label>
+        <label for="q10-b">B) Paul McCartney</label>
+        <label for="q10-c">C) George Harrison</label>
+        <label for="q10-d">D) Ringo Starr</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! McCartney compuso la melodía soñando. Es la canción más versionada de la historia, con más de 2.200 covers.</p>
+      <p class="feedback ko">✗ Incorrecto. Era B) Paul McCartney, que literalmente soñó la melodía y la escribió al despertar.</p>
+    </div>
+
+    <!-- PREGUNTA 11 -->
+    <div class="question">
+      <input type="radio" name="q11" id="q11-a">
+      <input type="radio" name="q11" id="q11-b">
+      <input type="radio" name="q11" id="q11-c">
+      <input type="radio" name="q11" id="q11-d">
+      <h3>11. ¿Cuál fue el primer álbum de estudio de The Beatles?</h3>
+      <div class="choices">
+        <label for="q11-a">A) Please Please Me</label>
+        <label for="q11-b">B) With the Beatles</label>
+        <label for="q11-c">C) A Hard Day's Night</label>
+        <label for="q11-d">D) Help!</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! Please Please Me fue lanzado el 22 de marzo de 1963, grabado en su mayor parte en un solo día.</p>
+      <p class="feedback ko">✗ Incorrecto. Era A) Please Please Me (1963), grabado casi entero en una sola sesión de estudio.</p>
+    </div>
+
+    <!-- PREGUNTA 12 -->
+    <div class="question">
+      <input type="radio" name="q12" id="q12-a">
+      <input type="radio" name="q12" id="q12-b">
+      <input type="radio" name="q12" id="q12-c">
+      <input type="radio" name="q12" id="q12-d">
+      <h3>12. ¿Cómo se llama el productor conocido como el "Quinto Beatle"?</h3>
+      <div class="choices">
+        <label for="q12-a">A) Phil Spector</label>
+        <label for="q12-b">B) Rick Rubin</label>
+        <label for="q12-c">C) George Martin</label>
+        <label for="q12-d">D) Quincy Jones</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! George Martin produjo casi todos sus álbumes y fue clave en desarrollar su sonido innovador.</p>
+      <p class="feedback ko">✗ Incorrecto. Era C) George Martin, quien los produjo desde Please Please Me hasta Abbey Road.</p>
+    </div>
+
+    <!-- PREGUNTA 13 -->
+    <div class="question">
+      <input type="radio" name="q13" id="q13-a">
+      <input type="radio" name="q13" id="q13-b">
+      <input type="radio" name="q13" id="q13-c">
+      <input type="radio" name="q13" id="q13-d">
+      <h3>13. ¿En qué película aparecen corriendo y perseguidos por fanáticas?</h3>
+      <div class="choices">
+        <label for="q13-a">A) Yellow Submarine</label>
+        <label for="q13-b">B) A Hard Day's Night</label>
+        <label for="q13-c">C) Help!</label>
+        <label for="q13-d">D) Magical Mystery Tour</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! A Hard Day's Night (1964) muestra a los Beatles siendo perseguidos por fans. Es considerada una de las mejores películas de rock.</p>
+      <p class="feedback ko">✗ Incorrecto. Era B) A Hard Day's Night (1964), dirigida por Richard Lester.</p>
+    </div>
+
+    <!-- PREGUNTA 14 -->
+    <div class="question">
+      <input type="radio" name="q14" id="q14-a">
+      <input type="radio" name="q14" id="q14-b">
+      <input type="radio" name="q14" id="q14-c">
+      <input type="radio" name="q14" id="q14-d">
+      <h3>14. ¿Qué instrumento toca principalmente Paul McCartney?</h3>
+      <div class="choices">
+        <label for="q14-a">A) Guitarra solista</label>
+        <label for="q14-b">B) Teclado</label>
+        <label for="q14-c">C) Batería</label>
+        <label for="q14-d">D) Bajo</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! McCartney es considerado uno de los mejores bajistas del rock. También toca piano y guitarra.</p>
+      <p class="feedback ko">✗ Incorrecto. Era D) Bajo — aunque también toca piano y guitarra, el bajo es su instrumento principal.</p>
+    </div>
+
+    <!-- PREGUNTA 15 -->
+    <div class="question">
+      <input type="radio" name="q15" id="q15-a">
+      <input type="radio" name="q15" id="q15-b">
+      <input type="radio" name="q15" id="q15-c">
+      <input type="radio" name="q15" id="q15-d">
+      <h3>15. ¿En qué año debutaron en el programa de TV Ed Sullivan en Estados Unidos?</h3>
+      <div class="choices">
+        <label for="q15-a">A) 1964</label>
+        <label for="q15-b">B) 1963</label>
+        <label for="q15-c">C) 1965</label>
+        <label for="q15-d">D) 1966</label>
+      </div>
+      <p class="feedback ok">✓ ¡Correcto! El 9 de febrero de 1964 tocaron ante 73 millones de espectadores, desencadenando la "Beatlemanía" en EE.UU.</p>
+      <p class="feedback ko">✗ Incorrecto. Era A) 1964 — el 9 de febrero, ante 73 millones de espectadores.</p>
+    </div>
+  </div>
+
+</body>
+</html>

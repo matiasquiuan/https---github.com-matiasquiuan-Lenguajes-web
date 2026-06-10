@@ -1,0 +1,101 @@
+/* Estilos básicos */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #555;
+}
+/* Se ponen con coma para marcar más de un elemento con el mismo estilo */
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+select {
+    appearance: none;
+    background-color: #fff;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+legend {
+    color: #333;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 10px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    padding: 10px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="reset"] {
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/* Enlaces */
+a {
+    color: #ff5733;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

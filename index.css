@@ -1,0 +1,152 @@
+
+* {
+  cursor: url("https://sweezy-cursors.com/wp-content/uploads/cursor/the-beatles/the-beatles-cursor-32x32.png"), auto;
+  
+}
+.clickable {
+  cursor: url("https://sweezy-cursors.com/wp-content/uploads/cursor/the-beatles/the-beatles-pointer-32x32.png"), pointer;
+}
+
+/* fondo*/
+body {
+    background: linear-gradient(160deg, #0a2a6e 0%, #1155b0 40%, #0e7fc2 70%, #14a8c4 100%);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+    
+}
+
+/* navegacion */
+.navigation{
+  background-color: #FFE030;
+  color: rgb(25, 20, 20);
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 20px;
+  font-weight: 100;
+  word-spacing: 2px;  
+}
+
+/* titulo principal */
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 3.5rem;
+    color: #FFE030;
+    text-shadow:
+        3px 3px 0px #d4a500,
+        0 0 30px rgba(255, 224, 48, 0.4);
+    margin: 10px 0 20px;
+    letter-spacing: 2px;
+}
+
+/* imagen principal */
+img[alt="Gran Imagen"] {
+    border: 6px solid #FFE030;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* cita */
+.quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #FFE030;
+    margin: 24px auto;
+    max-width: 600px;
+    border-left: 4px solid #FFE030;
+    padding-left: 16px;
+    text-align: left;
+    opacity: 0.9;
+}
+
+/* seccion grid */
+.grid-section {
+    padding: 30px 20px;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 2px solid rgba(255, 224, 48, 0.3);
+    border-radius: 16px;
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+h2 {
+    font-family: 'Righteous', cursive;
+    font-size: 2rem;
+    color: #FFE030;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.grid-item {
+    background: linear-gradient(145deg, #FFE030, #f5c200);
+    color: #0a2a6e;
+    padding: 18px 12px;
+    text-align: center;
+    border-radius: 12px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.grid-item img {
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 8px;
+    border: 3px solid #0a2a6e;
+}
+
+/* notas musicales*/
+.grid-item::after {
+    content: "♩";
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 6px;
+    opacity: 0.4;
+}
+
+/*frases carrusel*/
+.frases-section { text-align: center; margin: 30px auto; max-width: 700px; }
+.frases-titulo  { color: #FFE030; font-family: 'Righteous', cursive; letter-spacing: 2px; }
+.frases-box     { position: relative; height: 150px; display: flex; align-items: center; justify-content: center; }
+.frase          { position: absolute; width: 100%; opacity: 0; color: #fff; font-style: italic; font-size: 1.4rem; line-height: 1.6; }
+.autor          { display: block; font-style: normal; color: #FFE030; font-size: 1.8rem; margin-top: 8px; }
+
+.frase:nth-child(1) { animation: rotar 20s infinite 0s;  }
+.frase:nth-child(2) { animation: rotar 20s infinite 4s;  }
+.frase:nth-child(3) { animation: rotar 20s infinite 8s;  }
+.frase:nth-child(4) { animation: rotar 20s infinite 12s; }
+.frase:nth-child(5) { animation: rotar 20s infinite 16s; }
+
+@keyframes rotar {
+  0%  { opacity: 0 }
+  5%  { opacity: 1 }
+  20% { opacity: 1 }
+  25% { opacity: 0 }
+  100%{ opacity: 0 }
+}
