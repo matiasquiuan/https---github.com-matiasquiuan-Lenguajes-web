@@ -31,6 +31,8 @@ document.head.appendChild(script);
 
 function juegoInicio(){
     let btn = document.getElementById("btn");
+    let form = document.getElementById("respuesta-form");
+    
     btn.addEventListener("click", function() {
         console.log("Reproducir fragmento");
         var randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
@@ -47,19 +49,29 @@ function juegoInicio(){
         btn.disabled = true;
         btn.textContent = "🎵 Escuchando...";
         // parar despues de DURACION_CLIP segundos
-        stopTimer = setTimeout(() => {
+        let stopTimer = setTimeout(() => {
             ytPlayer.stopVideo();
-            btn.disabled = false;
+            btn.disabled = false; //desactivamos el boton
             btn.textContent = "▶ Reproducir fragmento";
         }, DURACION_CLIP * 1000);
-        });   
+        });  
+        
+    form.addEventListener("keyup", function(evento) {
+        if (evento.key === "Enter") {
+                evento.preventDefault(); // evita que el formulario se envie
+                verificarRespuesta(); // llama a la funcion para verificar la respuesta
+        }
+    });
+
     
 }
 
-function verificarRespuesta() {
-    let respuesta = document.getElementById("respuesta");
+function verificarRespuesta() { //funcion para verificar la respuesta del usuario
+    let respuesta = document.getElementsByClassName("respuesta").value;
     let puntos = document.getElementById("puntos");
-    if(respuesta.value.toLowerCase() === randomSong.name.toLowerCase()){
+    console.log("Respuesta del usuario:", respuesta);
+
+    if(respuesta.toLowerCase() === randomSong.name.toLowerCase()){
         // respuesta correcta
         console.log("Respuesta correcta");
         puntos.textContent = parseInt(puntos.textContent) + 1; // sumo un punto
@@ -71,6 +83,7 @@ function verificarRespuesta() {
         // respuesta incorrecta
         console.log("Respuesta incorrecta"); 
         btn.textContent = "▶ Volver a jugar";
+        puntos.textContent = "0"; // reseteo los puntos
         btn.addEventListener("click", function() {
             juegoInicio();
         });
