@@ -71,7 +71,7 @@ function juegoInicio(){
 }
 
 function verificarRespuesta() { //funcion para verificar la respuesta del usuario
-    let respuesta = document.getElementById("respuesta").value;
+    let respuesta = document.getElementById("respuesta").name;
     let puntos = document.getElementById("puntos");
     console.log("Respuesta del usuario:", respuesta);
 
