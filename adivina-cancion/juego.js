@@ -57,7 +57,9 @@ function juegoInicio(){
         });  
         
     form.addEventListener("keyup", function(evento) {
+        console.log("Tecla presionada antes de:", evento.key);
         evento.preventDefault(); // evita que el formulario se envie
+        console.log("Tecla presionada despues de:", evento.key);
         if (evento.key === "Enter") {
             verificarRespuesta(); // llama a la funcion para verificar la respuesta
         }
