@@ -1,5 +1,6 @@
 import songs from './canciones.js'; //importamos todas las canciones desde el arhivo
 
+let randomSong; // variable global para almacenar la cancion 
 let ytPlayer;
 let playerListo = false;
 const DURACION_CLIP = 10; // duración del fragmento en segundos
@@ -31,11 +32,11 @@ document.head.appendChild(script);
 
 function juegoInicio(){
     let btn = document.getElementById("btn");
-    let form = document.getElementById("respuesta-form");
+    let form = document.getElementById("respuesta");
     
     btn.addEventListener("click", function() {
         console.log("Reproducir fragmento");
-        var randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
+        randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
         console.log("Canción seleccionada:", randomSong);
         if (!ytPlayer || !playerListo) { // verifico que el player este listo
             console.warn("player no listo");
@@ -61,6 +62,7 @@ function juegoInicio(){
         evento.preventDefault(); // evita que el formulario se envie
         console.log("Tecla presionada despues de:", evento.key);
         if (evento.key === "Enter") {
+            console.log("Tecla presionada es enter:", evento.key);
             verificarRespuesta(); // llama a la funcion para verificar la respuesta
         }
     });
@@ -69,7 +71,7 @@ function juegoInicio(){
 }
 
 function verificarRespuesta() { //funcion para verificar la respuesta del usuario
-    let respuesta = document.getElementsByClassName("respuesta").value;
+    let respuesta = document.querySelector(".respuesta").value;
     let puntos = document.getElementById("puntos");
     console.log("Respuesta del usuario:", respuesta);
 
