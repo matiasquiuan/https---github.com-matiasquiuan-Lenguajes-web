@@ -57,9 +57,9 @@ function juegoInicio(){
         });  
         
     form.addEventListener("keyup", function(evento) {
+        evento.preventDefault(); // evita que el formulario se envie
         if (evento.key === "Enter") {
-                evento.preventDefault(); // evita que el formulario se envie
-                verificarRespuesta(); // llama a la funcion para verificar la respuesta
+            verificarRespuesta(); // llama a la funcion para verificar la respuesta
         }
     });
 
