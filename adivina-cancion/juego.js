@@ -5,8 +5,8 @@ let playerListo = false;
 
 window.onYouTubeIframeAPIReady = function() {
     ytPlayer = new YT.Player("yt-player", {
-      height: '390',
-      width: '640',
+      height: '0',
+      width: '0',
       playerVars: {
         autoplay: 0,
         controls: 0,
@@ -34,16 +34,25 @@ function juegoInicio(){
         console.log("Reproducir fragmento");
         const randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
         console.log("Canción seleccionada:", randomSong.videoId);
-        if (!ytPlayer || !playerListo) {
-            console.warn("⏳ El player todavía no está listo, esperá un momento");
+        if (!ytPlayer || !playerListo) { // verifico que el player este listo
+            console.warn("player no listo");
             return;
         }
-        ytPlayer.loadVideoById({
+        ytPlayer.loadVideoById({ //si lo esta cargo la cancion
             videoId: randomSong.videoId,
-            startSeconds: 0       // podés poner 30 para saltar al coro, por ejemplo
+            startSeconds: 0      
         });
         ytPlayer.playVideo();
-    });
+        btn.disabled = true;
+        btn.textContent = "🎵 Escuchando...";
+        // Parar después de DURACION_CLIP segundos
+        stopTimer = setTimeout(() => {
+            ytPlayer.stopVideo();
+            btn.disabled = false;
+            btn.textContent = "▶ Reproducir fragmento";
+        }, DURACION_CLIP * 1000);
+        });   
+    
 }
 
 

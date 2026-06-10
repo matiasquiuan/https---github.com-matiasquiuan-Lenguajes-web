@@ -51,5 +51,28 @@ h1 {
     width: 0%;
 }
 */
+/* boton para reproducir la cancion */
+#btn {
+    background-color: #FFE030;
+    color: rgb(25, 20, 20);
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: 'Righteous', cursive;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
 
+#btn:hover {
+    background-color: #d4a500;
+}
 
+/*input de la respuesta */
+.respuesta input {
+    padding: 1rem; 
+    border-radius: 8px; 
+    font-size: 1.1rem; 
+    margin: 1rem 0;
+}
