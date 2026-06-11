@@ -20,12 +20,13 @@ window.onYouTubeIframeAPIReady = function() {
       events: {
         onReady: () => {
             playerListo = true;
-            console.log("✅ YouTube Player listo");
+            console.log("player listo");
         }
       }
     });
 }
 
+//cargar api
 const script = document.createElement("script");
 script.src = "https://www.youtube.com/iframe_api";
 document.head.appendChild(script);
@@ -34,13 +35,11 @@ document.head.appendChild(script);
 function juegoInicio(){
     let btn = document.getElementById("btn");
     let form = document.getElementById("respuesta");
-    
-    //respuesta.value = ""; // reseteo el input de respuesta al iniciar el juego
 
     btn.addEventListener("click", function() {
 
         console.log("Reproducir fragmento");
-        randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
+        randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una cancion aleatoria
         console.log("Canción seleccionada:", randomSong);
         if (!ytPlayer || !playerListo) { // verifico que el player este listo
             console.warn("player no listo");
@@ -96,5 +95,5 @@ function verificarRespuesta() { //funcion para verificar la respuesta del usuari
     respuesta.value = ""; // reseteo el input de respuesta para la siguiente ronda
 }
 
-// Arrancar al cargar
+// arrancar al cargar
 juegoInicio();

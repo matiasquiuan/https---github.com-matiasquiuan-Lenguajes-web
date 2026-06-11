@@ -1,3 +1,11 @@
+* {
+    cursor: url("https://sweezy-cursors.com/wp-content/uploads/cursor/the-beatles/the-beatles-cursor-32x32.png"), auto;
+    
+}
+.clickable {
+    cursor: url("https://sweezy-cursors.com/wp-content/uploads/cursor/the-beatles/the-beatles-pointer-32x32.png"), pointer;
+}
+
 body {
     background: linear-gradient(160deg, #0a2a6e 0%, #1155b0 40%, #0e7fc2 70%, #14a8c4 100%);
     color: #fff;

@@ -1,106 +1,47 @@
-import songs from './canciones.js';
+import songs from './adivina-cancion/canciones.js';
 
-const PLAYLIST = songs;
-
-let playerIndex  = 0;
+let cancionActual;
 let ytPlayer;
-let playerListo  = false;
-let reproduciendo = false;
-let progressInterval;
+let playerListo = false;
 
-// ── Cargar API de YouTube ──────────────────────────────────────
-const ytScript = document.createElement("script");
-ytScript.src   = "https://www.youtube.com/iframe_api";
-document.head.appendChild(ytScript);
+// cargar api
+const script = document.createElement("script");
+script.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(script);
+
 
 window.onYouTubeIframeAPIReady = function() {
-  ytPlayer = new YT.Player("yt-player-index", {
-    height: "1", width: "1",
-    playerVars: { autoplay: 0, controls: 0, rel: 0 },
-    events: {
-      onReady: () => {
-        playerListo = true;
-        cargarCancion(0, false); // muestra info sin reproducir
-      },
-      onStateChange: (e) => {
-        if (e.data === YT.PlayerState.ENDED) siguiente();
-      }
-    }
-  });
+    ytPlayer = new YT.Player("player", {
+        height: "390",
+        width: "640",
+        playerVars: { autoplay: 0, rel: 0, playsinline: 1 },
+        events: {
+            onReady: () => {
+                playerListo = true;
+                console.log(" player listo ");
+            }
+        }
+    });
 };
 
-// ── Cargar canción ─────────────────────────────────────────────
-function cargarCancion(idx, autoplay) {
-  const song = PLAYLIST[idx];
 
-  document.getElementById("player-song").textContent = song.name;
-  document.getElementById("player-num").textContent  = `${idx + 1} / ${PLAYLIST.length}`;
-  document.getElementById("player-thumb").src = `https://img.youtube.com/vi/${song.videoId}/mqdefault.jpg`;
-  document.getElementById("player-bar").style.width  = "0%";
+document.getElementById("random-btn").addEventListener("click", function() {
+    if (!playerListo) {
+        console.warn("player no esta listo");
+        return;
+    }
 
-  if (!playerListo) return;
+    // leer cancion random
+    cancionActual = songs[Math.floor(Math.random() * songs.length)];
+    console.log("cancion seleccionada:", cancionActual);
 
-  if (autoplay) {
-    ytPlayer.loadVideoById({ videoId: song.videoId });
-    setPlay(true);
-  } else {
-    ytPlayer.cueVideoById({ videoId: song.videoId });
-    setPlay(false);
-  }
-}
+    // mostrar nombre
+    document.getElementById("nombre-cancion").textContent = cancionActual.name;
 
-// ── Play / Pause ───────────────────────────────────────────────
-function setPlay(estado) {
-  reproduciendo = estado;
-  document.getElementById("player-play").textContent = estado ? "⏸" : "▶";
-  if (estado) {
-    iniciarProgreso();
-  } else {
-    clearInterval(progressInterval);
-  }
-}
-
-function togglePlay() {
-  if (!playerListo) return;
-  if (reproduciendo) {
-    ytPlayer.pauseVideo();
-    setPlay(false);
-  } else {
+    // cargar y reproducir en el iframe
+    ytPlayer.loadVideoById({
+        videoId: cancionActual.videoId,
+        startSeconds: 0
+    });
     ytPlayer.playVideo();
-    setPlay(true);
-  }
-}
-
-// ── Anterior / Siguiente ───────────────────────────────────────
-function anterior() {
-  playerIndex = (playerIndex - 1 + PLAYLIST.length) % PLAYLIST.length;
-  cargarCancion(playerIndex, reproduciendo);
-}
-
-function siguiente() {
-  playerIndex = (playerIndex + 1) % PLAYLIST.length;
-  cargarCancion(playerIndex, reproduciendo);
-}
-
-// ── Barra de progreso ──────────────────────────────────────────
-function iniciarProgreso() {
-  clearInterval(progressInterval);
-  progressInterval = setInterval(() => {
-    if (!ytPlayer || !reproduciendo) return;
-    const current = ytPlayer.getCurrentTime() || 0;
-    const total   = ytPlayer.getDuration()    || 1;
-    document.getElementById("player-bar").style.width = (current / total * 100) + "%";
-  }, 500);
-}
-
-// Click en la barra para hacer seek
-document.getElementById("player-progress").addEventListener("click", function(e) {
-  if (!playerListo) return;
-  const pct   = (e.clientX - this.getBoundingClientRect().left) / this.offsetWidth;
-  ytPlayer.seekTo(pct * ytPlayer.getDuration(), true);
 });
-
-// ── Eventos de botones ─────────────────────────────────────────
-document.getElementById("player-play").addEventListener("click", togglePlay);
-document.getElementById("player-prev").addEventListener("click", anterior);
-document.getElementById("player-next").addEventListener("click", siguiente);

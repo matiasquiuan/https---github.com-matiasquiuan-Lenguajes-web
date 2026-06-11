@@ -6,7 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link href="C:\Users\matia\OneDrive\Documents\lenguajes\Lenguajes-web\quiz">
-    
+    <script type="module"src="index.js"></script>
+
 </head>
 <body>
  
@@ -53,31 +54,12 @@
     </div>
     </section>
 
-
-    <!-- player de audio -->
-    <section class="player-section">
-    <div class="player-card">
-        <img id="player-thumb" src="https://img.youtube.com/vi/mQER0A0ej0M/mqdefault.jpg" alt="Album art"/>
-        <div class="player-info">
-        <span id="player-song">Hey Jude</span>
-        <span id="player-num">1 / 10</span>
-        </div>
-        <div id="player-progress">
-        <div id="player-bar"></div>
-        </div>
-        <div class="player-controls">
-        <button id="player-prev">⏮</button>
-        <button id="player-play">▶</button>
-        <button id="player-next">⏭</button>
-        </div>
-    </div>
-    <!-- player oculto -->
-    <div id="yt-player-index" style="position:absolute;top:-9999px;left:-9999px;"></div>
-    </section>
-
-    <script src="/adivina-cancion/canciones.js"></script>
-    <script src="index.js"></script>
-
+    <!-- cancion random -->
+    <button id="random-btn">🎵 Canción Random</button>
+    <!-- nombre de la cancion -->
+    <p id="nombre-cancion"></p>
+    <!-- iframe -->
+    <div id="player"></div>
 
 </body>
 </html>
