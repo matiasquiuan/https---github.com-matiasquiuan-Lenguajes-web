@@ -76,3 +76,21 @@ h1 {
     font-size: 1.1rem; 
     margin: 1rem 0;
 }
+
+.puntaje {
+    display: inline-block;
+    background: rgba(255, 224, 48, 0.12);
+    border: 1px solid rgba(255, 224, 48, 0.3);
+    color: #FFE030;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-top: 14px;
+
+}
+
+p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}

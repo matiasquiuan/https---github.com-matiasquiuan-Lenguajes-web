@@ -4,6 +4,7 @@ let randomSong; // variable global para almacenar la cancion
 let ytPlayer;
 let playerListo = false;
 const DURACION_CLIP = 10; // duración del fragmento en segundos
+const respuesta = document.getElementById("respuesta-input");
 
 window.onYouTubeIframeAPIReady = function() {
     ytPlayer = new YT.Player("yt-player", {
@@ -34,7 +35,10 @@ function juegoInicio(){
     let btn = document.getElementById("btn");
     let form = document.getElementById("respuesta");
     
+    //respuesta.value = ""; // reseteo el input de respuesta al iniciar el juego
+
     btn.addEventListener("click", function() {
+
         console.log("Reproducir fragmento");
         randomSong = songs[Math.floor(Math.random() * songs.length)];//obtengo una canción aleatoria
         console.log("Canción seleccionada:", randomSong);
@@ -49,6 +53,7 @@ function juegoInicio(){
         ytPlayer.playVideo();
         btn.disabled = true;
         btn.textContent = "🎵 Escuchando...";
+        respuesta.disabled = false; // habilito el input para que el usuario pueda escribir su respuesta
         // parar despues de DURACION_CLIP segundos
         let stopTimer = setTimeout(() => {
             ytPlayer.stopVideo();
@@ -71,27 +76,24 @@ function juegoInicio(){
 }
 
 function verificarRespuesta() { //funcion para verificar la respuesta del usuario
-    let respuesta = document.getElementById("respuesta-input").value;
+    let texto = respuesta.value;
     let puntos = document.getElementById("puntos");
-    console.log("Respuesta del usuario:", respuesta);
+    let puntaje = parseInt(puntos.textContent) || 0; // obtengo el puntaje actual o 0 si no es un numero
+    console.log("Respuesta del usuario:", texto);
 
-    if(respuesta.toLowerCase() === randomSong.name.toLowerCase()){
+    if(texto.toLowerCase() === randomSong.name.toLowerCase()){
         // respuesta correcta
         console.log("Respuesta correcta");
-        puntos.textContent = parseInt(puntos.textContent) + 1; // sumo un punto
+        puntos.textContent =  puntaje + 1; // sumo un punto
         btn.textContent = "▶ Volver a jugar";
-        btn.addEventListener("click", function() {
-            juegoInicio();
-        });
+        respuesta.disabled = true; // desactivo el input para evitar respuestas multiples
     }else{
         // respuesta incorrecta
         console.log("Respuesta incorrecta"); 
         btn.textContent = "▶ Volver a jugar";
         puntos.textContent = "0"; // reseteo los puntos
-        btn.addEventListener("click", function() {
-            juegoInicio();
-        });
     }
+    respuesta.value = ""; // reseteo el input de respuesta para la siguiente ronda
 }
 
 // Arrancar al cargar
